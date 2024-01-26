@@ -1,0 +1,112 @@
+:root {
+  --purple: #D426BD;
+  --blue: #00C0F0;
+  --deepBlue: #001219;
+}
+
+@font-face {
+  font-family: myFont;
+  src: url(SpeedyRegular-7BLoE.ttf);
+}
+
+body{
+  background-color: var(--deepBlue);
+  height: 100vh;
+  position: relative;
+}
+
+h1 {
+  font-family: myFont;
+  color: var(--purple);
+  text-shadow: 2px 2px 4px var(--blue);
+  text-align: center;
+  font-size: 55px;
+  margin-top: 40px;
+}
+
+.page-container{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height:80vh;
+  position:absolute;
+  z-index: 2;
+}
+
+.login-form, .signup-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-heading {
+  font-size: 35px;
+  font-family: myFont;
+  margin-bottom: 10px;
+  color: var(--purple);
+  text-shadow: 2px 2px 4px var(--blue);
+}
+
+.login-form input, .signup-form input {
+  display:flex;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 2px 2px 4px var(--blue);
+}
+
+#submit {
+  margin-left:30%;
+}
+
+#submit-signup {
+  margin-left:30%;
+}
+
+.mySpaceman {
+  left: 50%; top: 10%;
+  width:150px;
+  position:absolute;
+  animation: spaceman 30s linear 1s infinite;
+  z-index: 1;
+}
+
+@keyframes spaceman {
+  0%    {left: 50%; top: 10%; transform: translate(-50%, -10%);}
+  25%   {left: 90%; top: 40%; transform: translate(-50%, -10%);}
+  50%   {left: 50%; top: 80%; transform: translate(-50%, -10%);}
+  75%   {left: 10%; top: 40%; transform: translate(-50%, -10%);}
+  100%  {left: 50%; top: 10%; transform: translate(-50%, -10%);}
+}
+
+.star-container{
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.star {
+  position: relative;
+  color: white;
+  animation: blink 5s infinite;
+  text-shadow: 2px 2px 7px white;
+}
+
+@keyframes blink {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+p {
+  color: white;
+}
+
+.hidden {
+  display:none;
+}
+
+a {
+  color: var(--purple);
+  text-decoration: none;
+}
