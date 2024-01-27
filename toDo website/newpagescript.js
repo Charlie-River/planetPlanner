@@ -18,25 +18,26 @@ function loadTasks(folderId) {
             // Iterate over tasks and append individual task containers
             for (var i = 0; i < tasks.length; i++) {
                 var task = tasks[i];
-                var taskHtml = '<div class="individual-task-container ">' +
-                    '<div class="split-row">' +
-                    '<div class="split-section taskInfo">' +
-                    '<div class="split-column">' +
-                    '<p id="taskName">' + task.taskName + '</p>' +
-                    '</div>' +
-                    '<div class="split-column">' +
-                    '<p id="taskDesc">' + task.taskDescription + '</p>' +
-                    '</div>' +
-                    '</div>' +
-                    '<div class="split-section checkbox">' +
-                    '<input type="checkbox" id="completed" name="taskcompleted" value="Completed">' +
-                    '</div>' +
-                    '</div>' +
-                    '</div>';
+                var taskHtml = '<div class="individual-task-container">' +
+
+                  '<div class="task-left-side>' +
+
+                      '<div class="split-column">' +
+                          '<p id="taskName">' + task.taskName + '</p>' +
+                          '<p id="taskDesc">' + task.taskDescription + '</p>' +
+                      '</div>' +
+
+                      '<div class="task-right-side">' +
+                          '<input type="checkbox" id="completed" name="taskcompleted" value="Completed">' +
+                      '</div>' +
+
+                  '</div>' +
+              '</div>';
 
                 // Append the task container to the main task container
                 taskContainer.append(taskHtml);
             }
+
         },
         error: function(error) {
             console.error('Error fetching tasks:', error);
