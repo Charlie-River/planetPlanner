@@ -17,3 +17,5 @@ Tasks:
 ### Other Information
 There are a few style issues that I am fighting for the moment, working on the functionality for the moment
   - This doesn't apply to the cute spaceman that I spent a while animating over the login page 😼
+
+**Also!** This has not yet been optimized for mobile :( The mobile version will need a different page for showing tasks as there's not enough space to have it the same as it is on web.
