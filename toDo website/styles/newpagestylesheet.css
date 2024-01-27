@@ -8,6 +8,7 @@
 
 .right-section{
   display: flex;
+  flex-direction: column;
   flex: 0.7;
 }
 
@@ -23,7 +24,7 @@ p{color:white;}
   background-color: var(--purple);
 }
 
-.addFolderPopup{
+.addFolderPopup {
   display: none;
   position: fixed;
   z-index: 9;
@@ -45,27 +46,46 @@ p{color:white;}
   box-shadow: 2px 2px 7px var(--purple);
 }
 
-.taskInfo {
-  flex: 0.7;
-  margin-top: 15px;
-}
-
-.task-container {
-  width: 100%;
+.individual-task-container {
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
   height: 100px;
   border-radius: 20px;
   font-family: myFont;
   color: white;
+  background-color: var(--purple);
+  margin-bottom: 40px;
+  padding: 5px;
 }
 
-.individual-task-container {
-    width: 70%;
-    height: 100px;
-    border-radius: 20px;
-    font-family: myFont;
-    color: white;
-    background-color: var(--purple);
-    margin-bottom: 40px;
+.task-left-side {
+  width:90%;
+}
+
+#taskName {
+  font-size: 20px;
+  margin-top: 5px;
+  margin-left:10px;
+}
+
+#taskDesc {
+  margin-left:10px;
+}
+
+.task-right-side {
+  width: 10%;
+  display: flex;
+  align-items: center;
+}
+
+.newTask {
+  height: 60px;
+  width: 70%;
+  border-radius: 20px;
+  font-family: myFont;
+  color: white;
+  background-color: var(--purple);
 }
 
 .split-column{
@@ -76,19 +96,6 @@ p{color:white;}
 .split-row {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-}
-
-.taskInfo {
-    display: flex;
-    flex-direction: column;
-    flex: 0.7;
-    margin-top: 15px;
-}
-
-.checkbox {
-    display: flex;
-    align-items: center;
 }
 
 input[type="checkbox"] {
