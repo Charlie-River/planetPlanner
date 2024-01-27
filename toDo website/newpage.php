@@ -112,31 +112,15 @@ try {
 
     <div class="right-section">
 
-
-
       <div class="task-container">
-        <!--
-          <div class="split-row">
-              <div class="taskInfo">
-                  <div class="split-column">
-                      <div id="taskName"> </div>
-                  </div>
-                  <div class="split-column">
-                      <p> Test </p>
-                  </div>
-              </div>
 
-              <div class="checkbox">
-                  <input type="checkbox" id="completed" name="taskcompleted" value="Completed">
-              </div>
-          </div>
-        -->
       </div>
+
+      <button class="newTask" onclick="openForm()"> + New Task </button>
 
     </div>
 
     <div class="star-container"></div>
-
 
   </div>
 </body>
