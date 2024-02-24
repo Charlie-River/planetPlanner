@@ -113,10 +113,25 @@ try {
     <div class="right-section">
 
       <div class="task-container">
-
       </div>
 
-      <button class="newTask" onclick="openForm()"> + New Task </button>
+      <button class="newTask" onclick=""> + New Task </button>
+
+      <section="overlay">
+      <div class="task-form-container">
+        <form ="task-form" action="">
+        <h2> New Task </h2>
+          <h4> Name </h4>
+          <input type="text" placeholder="Task Name" name="addTask">
+          <h4> Description </h4>
+          <input type="text" placeholder="Task Desctiption" name="addTask">
+          <div class="split-row split-section">
+            <input type="submit" id="create" name="createform" value="Create"/>
+          </div>
+        </form>
+      </div>
+
+
 
     </div>
 
@@ -127,4 +142,5 @@ try {
 
 <script src="index.js"></script>
 <script src="newpagescript.js"></script>
+
 </html>
