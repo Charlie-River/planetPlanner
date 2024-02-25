@@ -128,23 +128,6 @@ try {
           </form>
         </div>
 
-<!--
-        <div class="task-form-container" id="addTaskForm">
-          <form method="post" class="task-form">
-          <h2> New Task </h2>
-            <h4> Name </h4>
-            <input type="text" placeholder="Task Name" name="addTask">
-            <h4> Description </h4>
-            <input type="text" placeholder="Task Desctiption" name="addTask">
-            <div class="split-row split-section">
-              <input type="submit" id="create" name="createform" value="Create"/>
-            </div>
-            <div class="split-section">
-              <input type="submit" id="close" name="closeform" value="Close"/>
-            </div>
-          </form>
-        </div> -->
-
       </div>
     </div>
 
@@ -154,7 +137,7 @@ try {
       </div>
 
       <button class="newTask" onclick="openTaskForm()"> + New Task </button>
-	    
+
     </div>
 
     <div class="star-container"></div>
@@ -166,4 +149,3 @@ try {
 <script src="newpagescript.js"></script>
 
 </html>
-
