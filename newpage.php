@@ -2,7 +2,7 @@
 session_start(); // Start the session (if not already started)
 
 // Check if the form has been submitted
-if (isset($_POST['createform'])) {
+if (isset($_POST['createformFolder'])) {
     // Check that there is something being submitted
     if (!isset($_POST['addFolder'])) {
         // Display an error if either username or password is missing
@@ -90,7 +90,7 @@ try {
         <?php
             }
           } else {
-              echo "No products found in the wishlist.";
+              echo "Create a folder!.";
             }
         ?>
       </div>
@@ -103,27 +103,27 @@ try {
             <input type="text" placeholder="Folder Name" name="addFolder">
             <div class="split-row">
               <div class="split-section">
-                <input type="submit" id="create" name="createform" value="Create"/>
+                <input type="submit" id="createFolder" name="createFolder" value="Create"/>
               </div>
               <div class="split-section">
-                <input type="submit" id="close" name="closeform" value="Close"/>
+                <input type="submit" id="closeFolder" name="closeFolder" value="Close"/>
               </div>
             </div>
           </form>
         </div>
 
-        <div class="task-form-container" id="addTaskForm">
-          <form method="post" class="task-form">
-          <h2> New Task </h2>
-            <h4> Name </h4>
+        <div class="addTaskPopup" id="addTaskForm">
+          <form method="post" class="form-container">
+            <h2> New Task </h2>
             <input type="text" placeholder="Task Name" name="addTask">
-            <h4> Description </h4>
-            <input type="text" placeholder="Task Desctiption" name="addTask">
-            <div class="split-row split-section">
-              <input type="submit" id="create" name="createform" value="Create"/>
-            </div>
-            <div class="split-section">
-              <input type="submit" id="close" name="closeform" value="Close"/>
+            <input type="text" placeholder="Task Description" name="taskDesc">
+            <div class="split-row">
+              <div class="split-section">
+                <input type="submit" id="createTask" name="createTask" value="Create"/>
+              </div>
+              <div class="split-section">
+                <input type="submit" id="closeTask" name="closeTask" value="Close"/>
+              </div>
             </div>
           </form>
         </div>
@@ -136,7 +136,7 @@ try {
       <div class="task-container">
       </div>
 
-      <button class="newTask" onclick=""> + New Task </button>
+      <button class="newTask" onclick="openTaskForm()"> + New Task </button>
 
 
     </div>

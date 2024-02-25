@@ -3,6 +3,11 @@ function openForm() {
   addFolderForm.style.display = "block";
 }
 
+function openTaskForm() {
+  var addTaskForm = document.getElementById("addTaskForm");
+  addTaskForm.style.display = "block";
+}
+
 function loadTasks(folderId) {
     $.ajax({
         type: 'POST',

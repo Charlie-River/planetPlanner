@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   flex:0.3;
-  position: relative;
+  margin-right: 10px;
 }
 
 .right-section{
@@ -14,12 +14,12 @@
 
 .up,
 .down {
-  flex: 1; /* Distributes the available space equally between the two divs */
-  border: 1px solid #ccc; /* Optional: Add a border for visual separation */
+  flex: 1;
+  /*border: 1px solid #ccc;*/
+  margin-right: 20px;
 }
 
 .up {
-  margin-right:10;
   overflow-y: auto;
 
   /* WebKit-based browsers (Chrome, Safari) */
@@ -45,6 +45,13 @@ p{color:white;}
 
 .addFolderPopup {
   display: none;
+  width:60%;
+  margin-top:20px;
+  margin-left:20%;
+}
+
+.addTaskPopup {
+  display:none;
   width:60%;
   margin-top:20px;
   margin-left:20%;
@@ -123,15 +130,8 @@ input[type="checkbox"] {
   transform: scale(1.5);
 }
 
-.task-form-container {
-  display: flex;
-  width:25%;
-  background-color: var(--blue);
-  border:none;
-  text-align: center;
-  border-radius: 20px;
-  box-shadow: 2px 2px 7px var(--purple);
-  justify-content: center;
+input[type="text"] {
+  margin-bottom: 5px;
 }
 
 @media screen and (max-width:790px) {
