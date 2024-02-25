@@ -1,5 +1,5 @@
-<?php
-//This should finally
+<?php 
+//FINAL TEST PLEASE IM BEGGING
 session_start(); // Start the session (if not already started)
 
 // Check if the form has been submitted
