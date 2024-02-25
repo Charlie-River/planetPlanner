@@ -2,7 +2,7 @@
 session_start(); // Start the session (if not already started)
 
 // Check if the form has been submitted
-if (isset($_POST['createform'])) {
+if (isset($_POST['createformFolder'])) {
     // Check that there is something being submitted
     if (!isset($_POST['addFolder'])) {
         // Display an error if either username or password is missing
@@ -77,37 +77,75 @@ try {
 
   <div class="page-container">
     <div class="left-section">
-      <?php
-      // Display the product information
-      if ($rows && $rows->rowCount() > 0) {
-          foreach ($rows as $row) {
-      ?>
-      <button class="newFolder" onclick="loadTasks(<?php echo $row['folder_id']; ?>)">
-        <?php echo $row['folderName']; ?>
-      </button>
-      <?php
-          }
-        } else {
-            echo "No products found in the wishlist.";
-          }
-      ?>
-      <button class="newFolder" onclick="openForm()"> + New Folder </button>
+      <div class="up">
+        <button class="newFolder" onclick="openForm()"> + New Folder </button>
+        <?php
+        // Display the product information
+        if ($rows && $rows->rowCount() > 0) {
+            foreach ($rows as $row) {
+        ?>
+        <button class="newFolder" onclick="loadTasks(<?php echo $row['folder_id']; ?>)">
+          <?php echo $row['folderName']; ?>
+        </button>
+        <?php
+            }
+          } else {
+              echo "Create a folder!.";
+            }
+        ?>
+      </div>
 
-      <div class="addFolderPopup" id="addFolderForm">
-        <form method="post" class="form-container">
-          <h2> Create A Folder </h2>
-          <input type="text" placeholder="Folder Name" name="addFolder">
-          <div class="split-row">
-            <div class="split-section">
+      <div class="down">
+
+        <div class="addFolderPopup" id="addFolderForm">
+          <form method="post" class="form-container">
+            <h2> Create A Folder </h2>
+            <input type="text" placeholder="Folder Name" name="addFolder">
+            <div class="split-row">
+              <div class="split-section">
+                <input type="submit" id="createFolder" name="createFolder" value="Create"/>
+              </div>
+              <div class="split-section">
+                <input type="submit" id="closeFolder" name="closeFolder" value="Close"/>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="addTaskPopup" id="addTaskForm">
+          <form method="post" class="form-container">
+            <h2> New Task </h2>
+            <input type="text" placeholder="Task Name" name="addTask">
+            <input type="text" placeholder="Task Description" name="taskDesc">
+            <div class="split-row">
+              <div class="split-section">
+                <input type="submit" id="createTask" name="createTask" value="Create"/>
+              </div>
+              <div class="split-section">
+                <input type="submit" id="closeTask" name="closeTask" value="Close"/>
+              </div>
+            </div>
+          </form>
+        </div>
+
+<!--
+        <div class="task-form-container" id="addTaskForm">
+          <form method="post" class="task-form">
+          <h2> New Task </h2>
+            <h4> Name </h4>
+            <input type="text" placeholder="Task Name" name="addTask">
+            <h4> Description </h4>
+            <input type="text" placeholder="Task Desctiption" name="addTask">
+            <div class="split-row split-section">
               <input type="submit" id="create" name="createform" value="Create"/>
             </div>
             <div class="split-section">
               <input type="submit" id="close" name="closeform" value="Close"/>
             </div>
-          </div>
-        </form>
-      </div>
+          </form>
+        </div> -->
 
+      </div>
     </div>
 
     <div class="right-section">
@@ -115,24 +153,8 @@ try {
       <div class="task-container">
       </div>
 
-      <button class="newTask" onclick=""> + New Task </button>
-
-      <section="overlay">
-      <div class="task-form-container">
-        <form ="task-form" action="">
-        <h2> New Task </h2>
-          <h4> Name </h4>
-          <input type="text" placeholder="Task Name" name="addTask">
-          <h4> Description </h4>
-          <input type="text" placeholder="Task Desctiption" name="addTask">
-          <div class="split-row split-section">
-            <input type="submit" id="create" name="createform" value="Create"/>
-          </div>
-        </form>
-      </div>
-
-
-
+      <button class="newTask" onclick="openTaskForm()"> + New Task </button>
+	    
     </div>
 
     <div class="star-container"></div>
@@ -144,3 +166,4 @@ try {
 <script src="newpagescript.js"></script>
 
 </html>
+
