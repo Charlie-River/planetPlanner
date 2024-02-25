@@ -1,15 +1,33 @@
-
 .left-section{
   display: flex;
   flex-direction: column;
   flex:0.3;
-  position: relative;
+  margin-right: 10px;
 }
 
 .right-section{
   display: flex;
   flex-direction: column;
   flex: 0.7;
+}
+
+.up,
+.down {
+  flex: 1;
+  /*border: 1px solid #ccc;*/
+  margin-right: 20px;
+}
+
+.up {
+  overflow-y: auto;
+
+  /* WebKit-based browsers (Chrome, Safari) */
+  &::-webkit-scrollbar-track {
+    background-color: var(--deepBlue); /* Color of the track */
+  }
+
+  /* For Firefox */
+  scrollbar-color: var(--blue) var(--deepBlue); /* Color of the thumb and track */
 }
 
 p{color:white;}
@@ -26,12 +44,16 @@ p{color:white;}
 
 .addFolderPopup {
   display: none;
-  position: fixed;
-  z-index: 9;
-  position: absolute;
-  margin-left: 15%;
-  bottom: 10px;
-  left: 13%;
+  width:60%;
+  margin-top:20px;
+  margin-left:20%;
+}
+
+.addTaskPopup {
+  display:none;
+  width:60%;
+  margin-top:20px;
+  margin-left:20%;
 }
 
 .form-container {
@@ -107,15 +129,8 @@ input[type="checkbox"] {
   transform: scale(1.5);
 }
 
-.task-form-container {
-  display: flex;
-  width:25%;
-  background-color: var(--blue);
-  border:none;
-  text-align: center;
-  border-radius: 20px;
-  box-shadow: 2px 2px 7px var(--purple);
-  justify-content: center;
+input[type="text"] {
+  margin-bottom: 5px;
 }
 
 @media screen and (max-width:790px) {
@@ -135,4 +150,3 @@ input[type="checkbox"] {
     border:none;
   }
 }
-
