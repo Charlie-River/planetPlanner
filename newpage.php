@@ -1,5 +1,5 @@
 <?php
-//This should finally work??
+//This should finally
 session_start(); // Start the session (if not already started)
 
 // Check if the form has been submitted
