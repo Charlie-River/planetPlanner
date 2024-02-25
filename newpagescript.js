@@ -3,16 +3,17 @@ function openForm() {
   addFolderForm.style.display = "block";
 }
 
-function openTaskForm() {
-  var addTaskForm = document.getElementById("addTaskForm");
-  addTaskForm.style.display = "block";
-}
+// Declare a global variable to store the current folderId
+var currentFolderId;
 
 function loadTasks(folderId) {
+    // Set the currentFolderId
+    currentFolderId = folderId;
+
     $.ajax({
         type: 'POST',
         url: 'fetch_tasks.php',
-        data: { folderId: folderId },
+        data: { folderId: folderId, currentFolderId: currentFolderId },
         success: function(response) {
             var tasks = JSON.parse(response);
             var taskContainer = $('.task-container');
@@ -48,4 +49,14 @@ function loadTasks(folderId) {
             console.error('Error fetching tasks:', error);
         }
     });
+}
+
+// Function to open the task form
+function openTaskForm() {
+    console.log("Current Folder ID:", currentFolderId);
+    document.getElementById('taskid').value = currentFolderId;
+
+    // Add your code to open the task form here
+    var addTaskForm = document.getElementById("addTaskForm");
+    addTaskForm.style.display = "block";
 }

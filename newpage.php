@@ -1,9 +1,8 @@
 <?php 
-//FINAL TEST PLEASE IM BEGGING
 session_start(); // Start the session (if not already started)
 
 // Check if the form has been submitted
-if (isset($_POST['createformFolder'])) {
+if (isset($_POST['createFolder'])) {
     // Check that there is something being submitted
     if (!isset($_POST['addFolder'])) {
         // Display an error if either username or password is missing
@@ -26,6 +25,32 @@ if (isset($_POST['createformFolder'])) {
         echo ($ex->getMessage());
         exit;
     }
+}
+
+// Check if the form has been submitted
+if (isset($_POST['createTask'])) {
+  // Check that there is something being submitted
+  if (!isset($_POST['addTask'])) {
+      // Display an error if the task name is missing
+      exit('Please enter a Task!');
+  }
+
+  // Include the file to connect to the database, get the user_id
+  require_once("connectdb.php");
+  $user_id = $_SESSION['user_id'];
+  $folder_id = $_POST['taskid'];
+
+  try {
+      $addTask = $db->prepare('INSERT INTO tasks (folder_id, taskName, taskDescription) VALUES (?, ?, ?)');
+      $addTask->execute([$folder_id, $_POST['addTask'], $_POST['taskDesc']]);
+      header("Location: newpage.php");
+      exit();
+  } catch (PDOException $ex) {
+      // Display an error if there is an issue connecting to the database
+      echo ("Failed to connect to the database.<br>");
+      echo ($ex->getMessage());
+      exit;
+  }
 }
 
 try {
@@ -82,18 +107,19 @@ try {
         <button class="newFolder" onclick="openForm()"> + New Folder </button>
         <?php
         // Display the product information
-        if ($rows && $rows->rowCount() > 0) {
-            foreach ($rows as $row) {
-        ?>
-        <button class="newFolder" onclick="loadTasks(<?php echo $row['folder_id']; ?>)">
-          <?php echo $row['folderName']; ?>
-        </button>
-        <?php
-            }
-          } else {
-              echo "Create a folder!.";
-            }
-        ?>
+                if ($rows && $rows->rowCount() > 0) {
+                    foreach ($rows as $row) {
+                        $folder_id = $row['folder_id'];
+                ?>
+                <button class="newFolder" onclick="loadTasks(<?php echo $folder_id; ?>)">
+                    <?php echo $row['folderName']; ?>
+                </button>
+                <?php
+                    }
+                } else {
+                    echo "Create a folder!";
+                }
+                ?>
       </div>
 
       <div class="down">
@@ -116,11 +142,12 @@ try {
         <div class="addTaskPopup" id="addTaskForm">
           <form method="post" class="form-container">
             <h2> New Task </h2>
+            <input type="hidden" name="taskid" id="taskid" value="">
             <input type="text" placeholder="Task Name" name="addTask">
             <input type="text" placeholder="Task Description" name="taskDesc">
             <div class="split-row">
               <div class="split-section">
-                <input type="submit" id="createTask" name="createTask" value="Create"/>
+              <input type="submit" id="createTask" name="createTask" value="Create" />
               </div>
               <div class="split-section">
                 <input type="submit" id="closeTask" name="closeTask" value="Close"/>
