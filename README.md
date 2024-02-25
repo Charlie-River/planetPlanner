@@ -5,7 +5,7 @@ Tasks:
 - [x] Users can log in
 - [x] Users can sign up
 - [x] Users can add folders
-- [ ] Users can add tasks
+- [x] Users can add tasks
 - [x] Tasks from folders are displayed
 - [ ] Users can check tasks off once they're done - this affects the database.
 - [ ] Completed tasks that haven't been deleted will automatically be deleted after 7 days
