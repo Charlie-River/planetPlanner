@@ -1,4 +1,5 @@
 <?php
+//This is to test that its updating in git??
 session_start(); // Start the session (if not already started)
 
 // Check if the form has been submitted
