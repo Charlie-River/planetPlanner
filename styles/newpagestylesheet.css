@@ -1,4 +1,3 @@
-
 .left-section{
   display: flex;
   flex-direction: column;
@@ -29,9 +28,11 @@
 
   /* For Firefox */
   scrollbar-color: var(--blue) var(--deepBlue); /* Color of the thumb and track */
+  justify-content: center;
 }
 
-p{color:white;}
+p, h2{color:white;}
+h2 {margin-left:25%;}
 
 .newFolder {
   height: 60px;
@@ -72,8 +73,10 @@ p{color:white;}
 .individual-task-container {
   display: flex;
   justify-content: space-between;
+  flex-grow: 1;
   width: 70%;
-  height: 100px;
+  height: auto;
+  min-height: 100px;
   border-radius: 20px;
   font-family: myFont;
   color: white;
@@ -84,6 +87,8 @@ p{color:white;}
 
 .task-left-side {
   width:90%;
+  flex-grow: 1;
+  overflow: hidden;
 }
 
 #taskName {
@@ -109,6 +114,7 @@ p{color:white;}
   font-family: myFont;
   color: white;
   background-color: var(--purple);
+  margin-bottom: 20px;
 }
 
 .split-column{
