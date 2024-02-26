@@ -73,7 +73,7 @@ try {
     }
 } catch (PDOException $ex) {
     echo "An error occurred: " . $ex->getMessage();
-}
+} 
 
 ?>
 <!DOCTYPE html>
@@ -112,6 +112,7 @@ try {
                         $folder_id = $row['folder_id'];
                 ?>
                 <button class="newFolder" onclick="loadTasks(<?php echo $folder_id; ?>)">
+                <input type="hidden" name="openfolder" id="openfolder" value="<?php echo $row['folderName']; ?>">
                     <?php echo $row['folderName']; ?>
                 </button>
                 <?php
@@ -161,11 +162,12 @@ try {
 
     <div class="right-section">
 
-      <div class="task-container">
-      </div>
+    <h2><div class="folderHeading">  </div></h2>
 
       <button class="newTask" onclick="openTaskForm()"> + New Task </button>
 
+      <div class="task-container">
+      </div>
 
     </div>
 
