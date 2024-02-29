@@ -129,7 +129,7 @@ try {
           <form method="post" class="form-container">
             <h2> Create A Folder </h2>
             <input type="text" placeholder="Folder Name" name="addFolder">
-            <div class="split-row">
+            <div class="split-column">
               <div class="split-section">
                 <input type="submit" id="createFolder" name="createFolder" value="Create"/>
               </div>
@@ -146,7 +146,7 @@ try {
             <input type="hidden" name="taskid" id="taskid" value="">
             <input type="text" placeholder="Task Name" name="addTask">
             <input type="text" placeholder="Task Description" name="taskDesc">
-            <div class="split-row">
+            <div class="split-column">
               <div class="split-section">
               <input type="submit" id="createTask" name="createTask" value="Create" />
               </div>
@@ -161,14 +161,9 @@ try {
     </div>
 
     <div class="right-section">
-
     <h2><div class="folderHeading">  </div></h2>
-
       <button class="newTask" onclick="openTaskForm()"> + New Task </button>
-
-      <div class="task-container">
-      </div>
-
+      <div class="task-container"></div>
     </div>
 
     <div class="star-container"></div>
