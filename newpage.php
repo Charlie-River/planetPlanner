@@ -27,6 +27,7 @@ if (isset($_POST['createFolder'])) {
     }
 }
 
+// CREATE TASKS - COMPLETED
 // Check if the form has been submitted
 if (isset($_POST['createTask'])) {
   // Check that there is something being submitted
@@ -34,8 +35,7 @@ if (isset($_POST['createTask'])) {
       // Display an error if the task name is missing
       exit('Please enter a Task!');
   }
-
-  // Include the file to connect to the database, get the user_id
+  // Include the file to connect to the database, get the user_id and folder_id
   require_once("connectdb.php");
   $user_id = $_SESSION['user_id'];
   $folder_id = $_POST['taskid'];
@@ -59,14 +59,12 @@ try {
         $user_id = $_SESSION['user_id'];
         require_once("connectdb.php");
 
-        // Getting products from the wishlist for the user
+        // Getting all folders that the user has to be displayed
         $foldersquery = "SELECT folders.*
                   FROM folders
                   WHERE folders.user_id = '$user_id'";
-
         // Run the query
         $rows = $db->query($foldersquery);
-
     } else {
         // If user ID is not in the session
         echo "User ID not set in the session.";
@@ -74,6 +72,26 @@ try {
 } catch (PDOException $ex) {
     echo "An error occurred: " . $ex->getMessage();
 } 
+
+// DELETE TASK - COMPLETE
+if (isset($_POST['deleteTask'])) { 
+
+  // Include the file to connect to the database, get the task_id
+  require_once("connectdb.php");
+  $task_id = $_POST['deleteid'];
+
+  try {
+      $deleteTask = $db->prepare('DELETE FROM tasks WHERE task_id = ?');
+      $deleteTask->execute([$task_id]);
+      header("Location: newpage.php");
+      exit();
+  } catch (PDOException $ex) {
+      // Display an error if there is an issue connecting to the database
+      echo ("Failed to connect to the database.<br>");
+      echo ($ex->getMessage());
+      exit;
+  }
+}
 
 ?>
 <!DOCTYPE html>
