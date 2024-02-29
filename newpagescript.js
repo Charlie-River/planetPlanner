@@ -43,7 +43,7 @@ function loadTasks(folderId) {
                         </div>
                         <div>
                             <button class="complete-button">
-                                <img src="styles/images/trash.png" class="trash"/>
+                                <img src="styles/trash.png" class="trash"/>
                                 <label for="delete" class="label">Delete?</label>
                             </button>
                         </div>
