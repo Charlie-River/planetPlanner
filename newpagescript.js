@@ -28,15 +28,26 @@ function loadTasks(folderId) {
             // Iterate over tasks and append individual task containers
             for (var i = 0; i < tasks.length; i++) {
                 var task = tasks[i];
-                var taskHtml = `<div class="individual-task-container">
-                    <div class="task-left-side">
-                        <div class="split-column">
-                            <p id="taskName">${task.taskName}</p>
-                            <p id="taskDesc">${task.taskDescription}</p>
+                var taskHtml = 
+                `<div class="individual-task-container">
+                    <div class="info-container">
+                    <div class="split-row">
+                        <p id="taskName">${task.taskName}</p>
+                        <p id="taskDesc">${task.taskDescription}</p>
+                    <div class="split-column task-bottom-container">
+                        <div>
+                            <button class="complete-button">
+                                <input type="checkbox" id="completed" name="taskcompleted" value="Completed">
+                                <label for="completed" class="label">Complete!</label>
+                            </button>
                         </div>
-                        <div class="task-right-side">
-                            <input type="checkbox" id="completed" name="taskcompleted" value="Completed">
+                        <div>
+                            <button class="complete-button">
+                                <img src="styles/images/trash.png" class="trash"/>
+                                <label for="delete" class="label">Delete?</label>
+                            </button>
                         </div>
+                    </div>
                     </div>
                 </div>`;
 
