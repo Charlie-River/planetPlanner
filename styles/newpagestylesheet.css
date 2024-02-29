@@ -70,25 +70,24 @@ h2 {margin-left:25%;}
   box-shadow: 2px 2px 7px var(--purple);
 }
 
+.task-container{
+  width:70%;
+  height: auto;
+}
+
+.info-container {
+  width:100%;
+  min-height:100px;
+}
+
 .individual-task-container {
   display: flex;
-  justify-content: space-between;
-  flex-grow: 1;
-  width: 70%;
-  height: auto;
-  min-height: 100px;
   border-radius: 20px;
   font-family: myFont;
   color: white;
   background-color: var(--purple);
   margin-bottom: 40px;
   padding: 5px;
-}
-
-.task-left-side {
-  width:90%;
-  flex-grow: 1;
-  overflow: hidden;
 }
 
 #taskName {
@@ -101,12 +100,6 @@ h2 {margin-left:25%;}
   margin-left:10px;
 }
 
-.task-right-side {
-  width: 10%;
-  display: flex;
-  align-items: center;
-}
-
 .newTask {
   height: 60px;
   width: 70%;
@@ -117,22 +110,60 @@ h2 {margin-left:25%;}
   margin-bottom: 20px;
 }
 
-.split-column{
+/* stacks items on top of eachother i.e. a new row */
+.split-row {
   display: flex;
   flex-direction: column;
 }
 
-.split-row {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+/* puts items next to eachother i.e. a new column */
+.split-column {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
-.split-section input {margin-top:3px;}
+.task-bottom-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.task-top-container {
+  display: flex;
+  overflow: hidden; 
+}
+
+.split-column input {
+  margin-top: 3px;
+}
+
+.trash {
+  height: 35px;
+  width: auto;
+}
+
+.complete-button {
+  display: flex;
+  align-items: center;
+  background-color: var(--purple); /* Green background */
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.complete-button:hover {
+  background-color: var(--blue); /* Darker green on hover */
+}
+
+.label {
+  margin-left: 6px;
+}
 
 input[type="checkbox"] {
   width: 20px;
-  height: 30px;
+  height: 35px;
   transform: scale(1.5);
 }
 
