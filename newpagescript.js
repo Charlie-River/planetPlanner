@@ -36,16 +36,21 @@ function loadTasks(folderId) {
                         <p id="taskDesc">${task.taskDescription}</p>
                     <div class="split-column task-bottom-container">
                         <div>
-                            <button class="complete-button">
-                                <input type="checkbox" id="completed" name="taskcompleted" value="Completed">
+                        <form method="post">
+                            <button class="task-button">
+                                <input type="checkbox" id="completed" name="taskcompleted" value="${task.task_id}">
                                 <label for="completed" class="label">Complete!</label>
                             </button>
+                        </form>
                         </div>
                         <div>
-                            <button class="complete-button">
+                        <form method="post">
+                            <button type="submit" name="deleteTask" class="task-button">
+                                <input type="hidden" name="deleteid" id="deleteid" value="${task.task_id}">
                                 <img src="styles/trash.png" class="trash"/>
                                 <label for="delete" class="label">Delete?</label>
                             </button>
+                        </form>
                         </div>
                     </div>
                     </div>
