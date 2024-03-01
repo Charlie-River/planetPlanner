@@ -7,7 +7,7 @@ Tasks:
 - [x] Users can add folders
 - [x] Users can add tasks
 - [x] Tasks from folders are displayed
-- [ ] Users can check tasks off once they're done - this affects the database.
+- [x] Users can check tasks off once they're done - this affects the database.
 - [ ] Completed tasks that haven't been deleted will automatically be deleted after 7 days
 - [ ] Users can log out
 - [ ] Users can delete folders
