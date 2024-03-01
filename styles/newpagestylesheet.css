@@ -36,6 +36,7 @@ h2 {margin-left:25%;}
 
 .newFolder {
   height: 60px;
+  min-height: 60px;
   width: 60%;
   margin-left: 20%;
   border-radius: 20px;
@@ -145,7 +146,9 @@ h2 {margin-left:25%;}
 .task-button {
   display: flex;
   align-items: center;
-  background-color: var(--purple); /* Green background */
+  justify-content: center;
+  height: 100%;
+  background-color: var(--purple); /* purple background */
   color: white;
   padding: 10px;
   border: none;
@@ -153,11 +156,17 @@ h2 {margin-left:25%;}
   cursor: pointer;
 }
 
+.task-button p {
+  margin: 0; /* Remove default margin from the paragraph */
+}
+
 .task-button:hover {
   background-color: var(--blue); /* Darker green on hover */
 }
 
 .label {
+  text-align: center;
+  justify-content: center;
   margin-left: 6px;
 }
 

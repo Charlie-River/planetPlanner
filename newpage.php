@@ -1,4 +1,4 @@
-<?php 
+w<?php 
 session_start(); // Start the session (if not already started)
 
 // Check if the form has been submitted
@@ -83,6 +83,26 @@ if (isset($_POST['deleteTask'])) {
   try {
       $deleteTask = $db->prepare('DELETE FROM tasks WHERE task_id = ?');
       $deleteTask->execute([$task_id]);
+      header("Location: newpage.php");
+      exit();
+  } catch (PDOException $ex) {
+      // Display an error if there is an issue connecting to the database
+      echo ("Failed to connect to the database.<br>");
+      echo ($ex->getMessage());
+      exit;
+  }
+}
+
+// COMPLETE TASK 
+if (isset($_POST['completeTask'])) { 
+
+  // Include the file to connect to the database, get the task_id
+  require_once("connectdb.php");
+  $task_id = $_POST['completeid'];
+
+  try {
+      $completeTask = $db->prepare('UPDATE tasks SET completed = ?, completed_at = ? WHERE task_id = ?');
+      $completeTask->execute([1, date('Y-m-d'), $task_id]);
       header("Location: newpage.php");
       exit();
   } catch (PDOException $ex) {

@@ -37,9 +37,10 @@ function loadTasks(folderId) {
                     <div class="split-column task-bottom-container">
                         <div>
                         <form method="post">
-                            <button class="task-button">
-                                <input type="checkbox" id="completed" name="taskcompleted" value="${task.task_id}">
-                                <label for="completed" class="label">Complete!</label>
+                            <button type="submit" name="completeTask" class="task-button">
+                                <input type="hidden" name="completeid" id="completeid" value="${task.task_id}">
+                                <img src="styles/tick.png" class="trash"/>
+                                <p>Complete!</p>
                             </button>
                         </form>
                         </div>
@@ -48,7 +49,7 @@ function loadTasks(folderId) {
                             <button type="submit" name="deleteTask" class="task-button">
                                 <input type="hidden" name="deleteid" id="deleteid" value="${task.task_id}">
                                 <img src="styles/trash.png" class="trash"/>
-                                <label for="delete" class="label">Delete?</label>
+                                <p class="label">Delete?</p>
                             </button>
                         </form>
                         </div>
