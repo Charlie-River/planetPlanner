@@ -1,24 +1,98 @@
-w<?php 
+<?php 
 session_start(); // Start the session (if not already started)
 
-// Check if the form has been submitted
-if (isset($_POST['createFolder'])) {
-    // Check that there is something being submitted
-    if (!isset($_POST['addFolder'])) {
-        // Display an error if either username or password is missing
-        exit('Please enter a form name!');
-    }
+//DELETE TASK AFTER 7 DAYS COMPLETE - COMPLETED
+  try {
+    // Get the user ID variable for the query
+    if (isset($_SESSION['user_id'])) {
+        $user_id = $_SESSION['user_id'];
 
-    // Include the file to connect to the database, get the user_id
+        require_once("connectdb.php");
+
+        // Getting all tasks from user
+        $alltasksquery = "SELECT tasks.* FROM tasks JOIN folders ON tasks.folder_id = folders.folder_id WHERE folders.user_id = ?";
+
+        //Prepare/Execute to avoid injections!
+        $stmt = $db->prepare($alltasksquery);
+        $stmt->bindParam(1, $user_id, PDO::PARAM_INT);
+        // Execute the query
+        $stmt->execute();
+        
+        // Run the query
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        // Output the results for testing
+        //print_r($rows);
+
+        $alltasksquery = "DELETE FROM tasks WHERE completed_at <= DATE_SUB(NOW(), INTERVAL 7 DAY)";
+        //Prepare/Execute to avoid injections!
+        $stmt = $db->prepare($alltasksquery);
+        $stmt->execute();
+        } else {
+        // If user ID is not in the session
+        echo "Issue with function: remove after 7"; }
+      } 
+      catch (PDOException $ex) {
+        // Display an error if there is an issue connecting to the database
+        echo ("Failed to connect to the database.<br>");
+        echo ($ex->getMessage());
+        exit;
+  }
+
+//CREATE A FOLDER - COMPLETED
+if (isset($_POST['createFolder'])) {
+      // Check that there is something being submitted
+      if (!isset($_POST['addFolder'])) {
+          // Display an error if either username or password is missing
+          exit('Please enter a form name!');
+      }
+
+      // Include the file to connect to the database, get the user_id
+      require_once("connectdb.php");
+      $user_id = $_SESSION['user_id'];
+
+      try {
+        $addFolderQuery = 'INSERT INTO folders (user_id, folderName) VALUES (?, ?)';
+        //Prepare/Execute to avoid injections!
+        $stmt = $db->prepare($addFolderQuery);
+        $stmt->bindParam(1, $user_id, PDO::PARAM_INT);
+        $stmt->bindParam(2, $_POST['addFolder'], PDO::PARAM_STR);
+        // Execute the query
+        $stmt->execute();
+        header("Location: newpage.php");
+        exit();
+
+      } catch (PDOException $ex) {
+          // Display an error if there is an issue connecting to the database
+          echo ("Failed to connect to the database.<br>");
+          echo ($ex->getMessage());
+          exit;
+      }
+}
+
+// CREATE TASKS - COMPLETED
+if (isset($_POST['createTask'])) {
+    // Check that there is something being submitted
+    if (!isset($_POST['addTask'])) {
+        // Display an error if the task name is missing
+        exit('Please enter a Task!');
+    }
+    // Include the file to connect to the database, get the user_id and folder_id
     require_once("connectdb.php");
     $user_id = $_SESSION['user_id'];
+    $folder_id = $_POST['taskid'];
 
     try {
-      $addFolder = $db->prepare('INSERT INTO folders (user_id, folderName) VALUES (?, ?)');
-      $addFolder->execute([$user_id, $_POST['addFolder']]);
-      header("Location: newpage.php");
-      exit();
-
+        $addTask = 'INSERT INTO tasks (folder_id, taskName, taskDescription) VALUES (?, ?, ?)';
+        //Prepare/Execute to avoid injections!
+        $stmt = $db->prepare($addTask);
+        $stmt->bindParam(1, $folder_id, PDO::PARAM_INT);
+        $stmt->bindParam(2, $_POST['addTask'], PDO::PARAM_STR);
+        $stmt->bindParam(3, $_POST['taskDesc'], PDO::PARAM_STR);
+        // Execute the query
+        $stmt->execute();
+        header("Location: newpage.php");
+        exit();
+        
     } catch (PDOException $ex) {
         // Display an error if there is an issue connecting to the database
         echo ("Failed to connect to the database.<br>");
@@ -27,50 +101,25 @@ if (isset($_POST['createFolder'])) {
     }
 }
 
-// CREATE TASKS - COMPLETED
-// Check if the form has been submitted
-if (isset($_POST['createTask'])) {
-  // Check that there is something being submitted
-  if (!isset($_POST['addTask'])) {
-      // Display an error if the task name is missing
-      exit('Please enter a Task!');
-  }
-  // Include the file to connect to the database, get the user_id and folder_id
-  require_once("connectdb.php");
-  $user_id = $_SESSION['user_id'];
-  $folder_id = $_POST['taskid'];
-
-  try {
-      $addTask = $db->prepare('INSERT INTO tasks (folder_id, taskName, taskDescription) VALUES (?, ?, ?)');
-      $addTask->execute([$folder_id, $_POST['addTask'], $_POST['taskDesc']]);
-      header("Location: newpage.php");
-      exit();
-  } catch (PDOException $ex) {
-      // Display an error if there is an issue connecting to the database
-      echo ("Failed to connect to the database.<br>");
-      echo ($ex->getMessage());
-      exit;
-  }
-}
-
+//FETCH ALL FOLDERS FOR DISPLAY
 try {
-    // Get the user ID variable for the query
-    if (isset($_SESSION['user_id'])) {
-        $user_id = $_SESSION['user_id'];
-        require_once("connectdb.php");
+  // Get the user ID variable for the query
+  if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+    require_once("connectdb.php");
 
-        // Getting all folders that the user has to be displayed
-        $foldersquery = "SELECT folders.*
-                  FROM folders
-                  WHERE folders.user_id = '$user_id'";
-        // Run the query
-        $rows = $db->query($foldersquery);
+    // Getting all folders that the user has to be displayed
+    $foldersquery = "SELECT folders.*
+                    FROM folders
+                    WHERE folders.user_id = '$user_id'";
+    // Run the query
+    $rows = $db->query($foldersquery);
     } else {
-        // If user ID is not in the session
-        echo "User ID not set in the session.";
+      // If user ID is not in the session
+      echo "User ID not set in the session.";
     }
-} catch (PDOException $ex) {
-    echo "An error occurred: " . $ex->getMessage();
+  } catch (PDOException $ex) {
+      echo "An error occurred: " . $ex->getMessage();
 } 
 
 // DELETE TASK - COMPLETE
@@ -81,8 +130,12 @@ if (isset($_POST['deleteTask'])) {
   $task_id = $_POST['deleteid'];
 
   try {
-      $deleteTask = $db->prepare('DELETE FROM tasks WHERE task_id = ?');
-      $deleteTask->execute([$task_id]);
+      $deleteTask = 'DELETE FROM tasks WHERE task_id = ?';
+      //Prepare/Execute to avoid injections!
+      $stmt = $db->prepare($deleteTask);
+      $stmt->bindParam(1, $task_id, PDO::PARAM_INT);
+      // Execute the query
+      $stmt->execute();
       header("Location: newpage.php");
       exit();
   } catch (PDOException $ex) {
@@ -101,8 +154,13 @@ if (isset($_POST['completeTask'])) {
   $task_id = $_POST['completeid'];
 
   try {
-      $completeTask = $db->prepare('UPDATE tasks SET completed = ?, completed_at = ? WHERE task_id = ?');
-      $completeTask->execute([1, date('Y-m-d'), $task_id]);
+      $completeTask = 'UPDATE tasks SET completed = ?, completed_at = ? WHERE task_id = ?';
+      $stmt = $db->prepare($completeTask);
+      $stmt->bindValue(1, 1, PDO::PARAM_INT);
+      $stmt->bindValue(2, date('Y-m-d'), PDO::PARAM_STR);
+      $stmt->bindValue(3, $task_id, PDO::PARAM_INT);
+      // Execute the query
+      $stmt->execute();
       header("Location: newpage.php");
       exit();
   } catch (PDOException $ex) {
