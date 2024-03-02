@@ -1,8 +1,29 @@
+header {
+  display: flex;
+}
+
+.heading-container {
+  width: 100%;
+  height:auto
+}
+
+.heading {
+  display: flex;
+  flex: 0.9;
+  justify-content: center;
+}
+
+.icons {
+  display: flex;
+  flex: 0.1;
+  align-items: center;
+}
+
 .left-section{
   display: flex;
   flex-direction: column;
   flex:0.3;
-  margin-right: 10px;
+  margin-right: 10px; 
 }
 
 .right-section{
@@ -121,6 +142,9 @@ h2 {margin-left:25%;}
 .split-column {
   display: flex;
   flex-direction: row;
+}
+
+.space-around {
   justify-content: space-around;
 }
 
@@ -141,6 +165,19 @@ h2 {margin-left:25%;}
 .trash {
   height: 35px;
   width: auto;
+}
+
+.quit-img {
+  height: 50px;
+  width:auto;
+}
+
+.quit-button {
+  height: 100%;
+  background-color: var(--deepBlue); /* purple background */
+  padding: 10px;
+  border: none;
+  cursor: pointer;
 }
 
 .task-button {

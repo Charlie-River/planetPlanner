@@ -171,6 +171,27 @@ if (isset($_POST['completeTask'])) {
   }
 }
 
+//LOGOUT 
+if (isset($_POST['logout'])) {
+  // Get the user ID
+  if (isset($_SESSION['user_id'])) {
+      $user_id = $_SESSION['user_id'];
+
+      require_once("connectdb.php");
+
+      //Destroy the session
+      session_unset();
+      session_destroy();
+
+      //Unset any session variables - there should be none anyway
+      $_SESSION = array();
+
+      // Expire the session cookie
+      setcookie(session_name(), '', time() - 3600, '/'); // Setting expiration time to past removes the cookie
+      header("Location: index.php");
+      exit();
+  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -192,7 +213,20 @@ if (isset($_POST['completeTask'])) {
 </head>
 
 <header>
-	<h1>  Hello <?php echo $_SESSION["username"]; ?></h1>
+  <div class="heading-container">
+    <div class="split-column">
+      <div class="heading">
+        <h1>  Hello <?php echo $_SESSION["username"]; ?></h1> 
+      </div>
+      <div class="icons">
+        <form method="post">
+          <button type="submit" name="logout" class="quit-button">
+            <img src="styles/quit.png" class="quit-img" alt="Logout">
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
 </header>
 
 <body>
@@ -225,7 +259,7 @@ if (isset($_POST['completeTask'])) {
           <form method="post" class="form-container">
             <h2> Create A Folder </h2>
             <input type="text" placeholder="Folder Name" name="addFolder">
-            <div class="split-column">
+            <div class="split-column space-around">
               <div class="split-section">
                 <input type="submit" id="createFolder" name="createFolder" value="Create"/>
               </div>
@@ -242,7 +276,7 @@ if (isset($_POST['completeTask'])) {
             <input type="hidden" name="taskid" id="taskid" value="">
             <input type="text" placeholder="Task Name" name="addTask">
             <input type="text" placeholder="Task Description" name="taskDesc">
-            <div class="split-column">
+            <div class="split-column space-around">
               <div class="split-section">
               <input type="submit" id="createTask" name="createTask" value="Create" />
               </div>
