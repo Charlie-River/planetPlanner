@@ -112,6 +112,10 @@ h2 {margin-left:25%;}
   padding: 5px;
 }
 
+.container-glow {
+  box-shadow: 0 0 10px rgba(144, 238, 144, 0.8);
+}
+
 #taskName {
   font-size: 20px;
   margin-top: 5px;
@@ -119,6 +123,10 @@ h2 {margin-left:25%;}
 }
 
 #taskDesc {
+  margin-left:10px;
+}
+
+#taskCompleted {
   margin-left:10px;
 }
 
@@ -146,6 +154,10 @@ h2 {margin-left:25%;}
 
 .space-around {
   justify-content: space-around;
+}
+
+.justify-center {
+  justify-content: center;
 }
 
 .task-bottom-container {

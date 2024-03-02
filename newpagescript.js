@@ -53,7 +53,32 @@ function loadTasks(folderId) {
             // Iterate over tasks and append individual task containers
             for (var i = 0; i < tasks.length; i++) {
                 var task = tasks[i];
-                var taskHtml = 
+                if (task.completed == 1) {
+                    var taskHtml = 
+                `<div class="individual-task-container container-glow">
+                    <div class="info-container">
+                    <div class="split-row">
+                        <p id="taskName">${task.taskName} - Completed!</p>
+                        <p id="taskDesc">${task.taskDescription}</p>
+                        <p id="taskCompleted"> You completed this task: ${task.completed_at} </p>
+
+                    <div class="split-column justify-center">
+                        <div>
+                            <form method="post">
+                                <button type="submit" name="deleteTask" class="task-button">
+                                <p> Would you like to </p>
+                                    <input type="hidden" name="deleteid" id="deleteid" value="${task.task_id}">
+                                    <img src="styles/trash.png" class="trash"/>
+                                    <p>Delete?</p>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    </div>
+                </div>`;
+
+                } else {
+                    var taskHtml = 
                 `<div class="individual-task-container">
                     <div class="info-container">
                     <div class="split-row">
@@ -81,6 +106,7 @@ function loadTasks(folderId) {
                     </div>
                     </div>
                 </div>`;
+                }
 
                 // Append the task container to the main task container
                 taskContainer.append(taskHtml);
