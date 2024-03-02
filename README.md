@@ -14,7 +14,7 @@ Tasks:
 - [x] Selecting a folder will change a heading (that needs to be implemented)
 - [x] Users can delete tasks without them being completed
 - [x] Only 1 form will appear at a time - because all forms appear in the same place
-- [ ] Completed tasks will look different on front-end
+- [x] Completed tasks will look different on front-end
  
 + Other tasks may be added further on
 + There might need to be a new page/nav that lets the user log out, edit folders/tasks, delete folders. This could be a users settings page, i dont want to clutter the main screen with too many things - hence thinking about a new page
