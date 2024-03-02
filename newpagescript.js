@@ -1,6 +1,31 @@
 function openForm() {
-  var addFolderForm = document.getElementById("addFolderForm");
-  addFolderForm.style.display = "block";
+    var addTaskForm = document.getElementById("addTaskForm");
+    var addFolderForm = document.getElementById("addFolderForm");
+
+    //if task form is displaying instead, change it
+    if (addTaskForm.style.display == "block") {
+        addTaskForm.style.display = "none";
+        addFolderForm.style.display = "block";
+    } else {
+        addFolderForm.style.display = "block";
+    }
+}
+
+// Function to open the task form
+function openTaskForm() {
+    document.getElementById('taskid').value = currentFolderId;
+    console.log("Current Folder ID:", currentFolderId);
+
+    var addTaskForm = document.getElementById("addTaskForm");
+    var addFolderForm = document.getElementById("addFolderForm");
+
+    //if folder form is displaying instead, change it
+    if (addFolderForm.style.display == "block") {
+        addFolderForm.style.display = "none";
+        addTaskForm.style.display = "block";
+    } else {
+        addTaskForm.style.display = "block";
+    }
 }
 
 // Declare a global variable to store the current folderId
@@ -49,7 +74,7 @@ function loadTasks(folderId) {
                             <button type="submit" name="deleteTask" class="task-button">
                                 <input type="hidden" name="deleteid" id="deleteid" value="${task.task_id}">
                                 <img src="styles/trash.png" class="trash"/>
-                                <p class="label">Delete?</p>
+                                <p>Delete?</p>
                             </button>
                         </form>
                         </div>
@@ -65,14 +90,4 @@ function loadTasks(folderId) {
             console.error('Error fetching tasks:', error);
         }
     });
-}
-
-// Function to open the task form
-function openTaskForm() {
-    console.log("Current Folder ID:", currentFolderId);
-    document.getElementById('taskid').value = currentFolderId;
-
-    // Add your code to open the task form here
-    var addTaskForm = document.getElementById("addTaskForm");
-    addTaskForm.style.display = "block";
 }
