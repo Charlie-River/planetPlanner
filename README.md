@@ -13,7 +13,7 @@ Tasks:
 - [ ] Users can delete folders
 - [x] Selecting a folder will change a heading (that needs to be implemented)
 - [x] Users can delete tasks without them being completed
-- [ ] Only 1 form will appear at a time - because all forms appear in the same place
+- [x] Only 1 form will appear at a time - because all forms appear in the same place
 - [ ] Completed tasks will look different on front-end
  
 + Other tasks may be added further on
