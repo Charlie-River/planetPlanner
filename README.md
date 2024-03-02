@@ -9,7 +9,7 @@ Tasks:
 - [x] Tasks from folders are displayed
 - [x] Users can check tasks off once they're done - this affects the database.
 - [x] Completed tasks that haven't been deleted will automatically be deleted after 7 days
-- [ ] Users can log out
+- [x] Users can log out
 - [ ] Users can delete folders
 - [x] Selecting a folder will change a heading (that needs to be implemented)
 - [x] Users can delete tasks without them being completed
