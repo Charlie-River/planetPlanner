@@ -117,3 +117,20 @@ function loadTasks(folderId) {
         }
     });
 }
+
+function toggleDropdown(button) {
+    var dropdown = button.querySelector('.dropdown-content');
+    dropdown.classList.toggle('show');
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+    if (!event.target.matches('.optionIcon')) {
+        var dropdowns = document.querySelectorAll('.dropdown-content');
+        dropdowns.forEach(function(dropdown) {
+            if (dropdown.classList.contains('show')) {
+                dropdown.classList.remove('show');
+            }
+        });
+    }
+};

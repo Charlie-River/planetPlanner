@@ -146,7 +146,7 @@ if (isset($_POST['deleteTask'])) {
   }
 }
 
-// COMPLETE TASK 
+// COMPLETE TASK - COMPLETE
 if (isset($_POST['completeTask'])) { 
 
   // Include the file to connect to the database, get the task_id
@@ -171,7 +171,7 @@ if (isset($_POST['completeTask'])) {
   }
 }
 
-//LOGOUT 
+//LOGOUT - COMPLETE
 if (isset($_POST['logout'])) {
   // Get the user ID
   if (isset($_SESSION['user_id'])) {
@@ -192,6 +192,7 @@ if (isset($_POST['logout'])) {
       exit();
   }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -237,20 +238,32 @@ if (isset($_POST['logout'])) {
         <button class="newFolder" onclick="openForm()"> + New Folder </button>
         <?php
         // Display the product information
-                if ($rows && $rows->rowCount() > 0) {
-                    foreach ($rows as $row) {
-                        $folder_id = $row['folder_id'];
-                ?>
-                <button class="newFolder" onclick="loadTasks(<?php echo $folder_id; ?>)">
-                <input type="hidden" name="openfolder" id="openfolder" value="<?php echo $row['folderName']; ?>">
-                    <?php echo $row['folderName']; ?>
-                </button>
-                <?php
-                    }
-                } else {
-                    echo "Create a folder!";
-                }
-                ?>
+        if ($rows && $rows->rowCount() > 0) {
+          foreach ($rows as $row) {
+          $folder_id = $row['folder_id'];
+          ?>
+        <button class="newFolder" onclick="loadTasks(<?php echo $folder_id; ?>)">
+          <div class="right-section">
+            <input type="hidden" name="openfolder" id="openfolder" value="<?php echo $row['folderName']; ?>">
+            <?php echo $row['folderName']; ?>
+          </div>
+          <div class="folder-options left-section">
+                <span class="nestedButton" onclick="toggleDropdown(this)">
+                    <img src="styles/options.png" class="optionIcon" alt="Folder Options">
+                    <div class="dropdown-content">
+                        <a href="#">Delete Folder</a>
+                        <a href="#">Edit Folder</a>
+                    </div>
+                </span>
+            </div>
+        </button>
+        
+        <?php
+          }
+        } else {
+          echo "Create a folder!";
+        } 
+      ?>
       </div>
 
       <div class="down">
@@ -292,7 +305,8 @@ if (isset($_POST['logout'])) {
 
     <div class="right-section">
     <h2><div class="folderHeading">  </div></h2>
-      <button class="newTask" onclick="openTaskForm()"> + New Task </button>
+
+    <button class="newTask" onclick="openTaskForm()"> + New Task </button>
       <div class="task-container"></div>
     </div>
 
