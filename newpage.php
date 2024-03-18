@@ -81,13 +81,16 @@ if (isset($_POST['createTask'])) {
     $user_id = $_SESSION['user_id'];
     $folder_id = $_POST['taskid'];
 
+     // Check if task description is provided, if not, set it to NULL or a placeholder value
+     $taskDesc = isset($_POST['taskDesc']) ? $_POST['taskDesc'] : "";
+
     try {
         $addTask = 'INSERT INTO tasks (folder_id, taskName, taskDescription) VALUES (?, ?, ?)';
         //Prepare/Execute to avoid injections!
         $stmt = $db->prepare($addTask);
         $stmt->bindParam(1, $folder_id, PDO::PARAM_INT);
         $stmt->bindParam(2, $_POST['addTask'], PDO::PARAM_STR);
-        $stmt->bindParam(3, $_POST['taskDesc'], PDO::PARAM_STR);
+        $stmt->bindParam(3, $taskDesc, PDO::PARAM_STR);
         // Execute the query
         $stmt->execute();
         header("Location: newpage.php");
@@ -193,6 +196,7 @@ if (isset($_POST['logout'])) {
   }
 }
 
+// DELETE FOLDER FUNCTION - COMPLETE
 function deleteFolder($db, $folder_id) {
   require_once("connectdb.php");
   $folder_id = $folder_id;
@@ -205,18 +209,15 @@ function deleteFolder($db, $folder_id) {
     $stmt->execute();
     header("Location: newpage.php");
     exit();
-} catch (PDOException $ex) {
-    // Display an error if there is an issue connecting to the database
-    echo ("Failed to connect to the database.<br>");
-    echo ($ex->getMessage());
-    exit;
-}
-}
-
-function editFolder($folder_id) {
-  echo "Editing folder with ID: " . $folder_id;
+  } catch (PDOException $ex) {
+      // Display an error if there is an issue connecting to the database
+      echo ("Failed to connect to the database.<br>");
+      echo ($ex->getMessage());
+      exit;
+  }
 }
 
+//DELETE FOLDER SWITCH - STARTS DELETE FUNCTION
 if(isset($_GET['action'])) {
   $action = $_GET['action'];
   //var_dump($_GET); // testing
@@ -225,11 +226,6 @@ if(isset($_GET['action'])) {
   if($action === 'delete_folder' && isset($_GET['folder_id'])) {
       $folder_id = $_GET['folder_id'];
       deleteFolder($db, $folder_id);
-  } 
-  // Check if action is edit_folder and folder_id is set
-  elseif($action === 'edit_folder' && isset($_GET['folder_id'])) {
-      $folder_id = $_GET['folder_id'];
-      editFolder($folder_id);
   } 
   else {
       echo "Invalid action or folder ID.";

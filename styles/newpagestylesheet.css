@@ -11,6 +11,7 @@ header {
   display: flex;
   flex: 0.9;
   justify-content: center;
+  margin-left: 15%;
 }
 
 .icons {
@@ -53,7 +54,10 @@ header {
 }
 
 p, h2{color:white;}
-h2 {margin-left:25%;}
+
+.folderHeading {
+  margin-left: 25%;
+}
 
 .newFolder {
   height: 60px;
