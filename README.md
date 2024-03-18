@@ -6,7 +6,7 @@ All main tasks were completed! The next steps are just some finalizing edits bef
 Finalizing Tasks: 
 - [ ] After editing a folder, the form needs manually closing before it refreshes the page
 - [ ] Something should appear for the user when theyre not in a folder
-- [ ] The heading which displays what folder the user is in, only changes if there are tasks in the folder
+- [x] The heading which displays what folder the user is in, only changes if there are tasks in the folder - users now get shown "Add tasks!" instead of the folder name.
 - [ ] After deleting a page, it removes the user from the folder theyt were in
 - [x] Users should not be required to add a task description when adding a task
 - [x] Alt needed for images

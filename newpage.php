@@ -139,13 +139,14 @@ if (isset($_POST['deleteTask'])) {
       $stmt->bindParam(1, $task_id, PDO::PARAM_INT);
       // Execute the query
       $stmt->execute();
-      header("Location: newpage.php");
+      // Return success message
+      echo json_encode(["success" => true]);
       exit();
   } catch (PDOException $ex) {
       // Display an error if there is an issue connecting to the database
-      echo ("Failed to connect to the database.<br>");
-      echo ($ex->getMessage());
-      exit;
+       // Return error message
+        echo json_encode(["success" => false, "error" => "Failed to delete task: " . $ex->getMessage()]);
+        exit;
   }
 }
 

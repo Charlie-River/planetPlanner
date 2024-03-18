@@ -49,7 +49,12 @@ function loadTasks(folderId) {
             taskContainer.empty();
 
             // Display folder information in the heading
-            folderHeading.html(`Your ${tasks[0].folderName} Tasks!`);
+            if (tasks.length > 0) {
+                folderHeading.html(`Your ${tasks[0].folderName} Tasks!`);
+            } else {
+                // Handle the case when no tasks are retrieved
+                folderHeading.html('Add some tasks!');
+            }
 
             // Iterate over tasks and append individual task containers
             for (var i = 0; i < tasks.length; i++) {
@@ -111,6 +116,8 @@ function loadTasks(folderId) {
 
                 // Append the task container to the main task container
                 taskContainer.append(taskHtml);
+                openFolder(folderId);
+                loadLastOpenedFolderTasks();
             }
         },
         error: function(error) {
@@ -171,4 +178,21 @@ function openEditForm(folderId) {
         editFolderForm.style.display = "block";
     }
     
+}
+
+// Function to open a folder and store its ID in local storage
+function openFolder(folderId) {
+    localStorage.setItem('lastOpenedFolderId', folderId);
+    //loadTasks(folderId); // Load tasks of the opened folder
+}
+
+// Function to load tasks of the last opened folder
+function loadLastOpenedFolderTasks() {
+    var lastOpenedFolderId = localStorage.getItem('lastOpenedFolderId');
+    if (lastOpenedFolderId) {
+        //loadTasks(lastOpenedFolderId);
+        console.log("folder stored:", lastOpenedFolderId)
+    } else {
+        console.log("nO FOLDER STORED")
+    }
 }
