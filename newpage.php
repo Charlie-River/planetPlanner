@@ -236,6 +236,34 @@ if(isset($_GET['action'])) {
   }
 }
 
+// EDIT TASK - COMPLETE
+if (isset($_POST['editFolder'], $_POST['folderId'])) { 
+
+    // Get the folder ID and new folder name from the POST parameters
+    $folder_id = $_POST['folderId'];
+    $newName = $_POST['editFolder'];
+
+    try {
+        // Prepare the SQL query to update the folder name
+        $editFolder = 'UPDATE folders SET folderName = ? WHERE folder_id = ?';
+        $stmt = $db->prepare($editFolder);
+        $stmt->bindParam(1, $newName, PDO::PARAM_STR);
+        $stmt->bindParam(2, $folder_id, PDO::PARAM_INT);
+
+        // Execute the query
+        $stmt->execute();
+
+        // Redirect back to the page after successful update
+        header("Location: newpage.php");
+        exit();
+    } catch (PDOException $ex) {
+        // Display an error if there is an issue executing the query
+        echo ("Failed to update folder name.<br>");
+        echo ($ex->getMessage());
+        exit;
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -295,7 +323,7 @@ if(isset($_GET['action'])) {
                     <img src="styles/options.png" class="optionIcon" alt="Folder Options">
                     <div class="dropdown-content">
                         <a href="?action=delete_folder&folder_id=<?php echo $folder_id; ?>">Delete Folder</a>
-                        <a onclick="">Edit Folder (In Progress)</a>
+                        <a onclick="openEditForm(<?php echo $folder_id; ?>)">Edit Folder (In Progress)</a>
                     </div>
                 </span>
             </div>
@@ -328,18 +356,20 @@ if(isset($_GET['action'])) {
 
         <div class="editFolderPopup" id="editFolderForm">
           <form method="post" class="form-container">
-            <h2> Edit Your Folder </h2>
-            <input type="text" placeholder="New Folder Name" name="editFolder">
-            <div class="split-column space-around">
-              <div class="split-section">
-                <input type="submit" id="editFolder" name="editFolder" value="Edit"/>
+              <h2> Edit Your Folder </h2>
+              <input type="text" placeholder="New Folder Name" id="editFolder" name="editFolder">
+              <div class="split-column space-around">
+                  <div class="split-section">
+                      <button type="button" id="editFolderButton" onclick="openEditForm(<?php echo $folder_id; ?>)">
+                          Edit
+                      </button>
+                  </div>
+                  <div class="split-section">
+                      <input type="submit" id="closeEditFolder" name="closeEditFolder" value="Close"/>
+                  </div>
               </div>
-              <div class="split-section">
-                <input type="submit" id="closeEditFolder" name="closeEditFolder" value="Close"/>
-              </div>
-            </div>
           </form>
-        </div>
+      </div>
 
         <div class="addTaskPopup" id="addTaskForm">
           <form method="post" class="form-container">

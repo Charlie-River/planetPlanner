@@ -11,7 +11,6 @@ function openForm() {
         addFolderForm.style.display = "block";
     }
 }
-
 // Function to open the task form
 function openTaskForm() {
     document.getElementById('taskid').value = currentFolderId;
@@ -28,6 +27,7 @@ function openTaskForm() {
         addTaskForm.style.display = "block";
     }
 }
+
 
 // Declare a global variable to store the current folderId
 var currentFolderId;
@@ -135,3 +135,40 @@ window.onclick = function(event) {
         });
     }
 };
+
+function openEditForm(folderId) {
+    console.log("Folder ID:", folderId);
+    console.log("Edit Form CLICKED");
+
+    var newName = document.getElementById("editFolder").value; // Get the new folder name
+
+    // Send folderId and new folder name to PHP using AJAX
+    $.ajax({
+        type: 'POST',
+        url: 'newpage.php',
+        data: { folderId: folderId, editFolder: newName },
+        success: function(response) {
+            console.log('Folder ID and new name sent to PHP successfully');
+            // Optionally handle response from PHP if needed
+        },
+        error: function(error) {
+            console.error('Error sending folder ID and new name to PHP:', error);
+        }
+    });
+
+    var addTaskForm = document.getElementById("addTaskForm");
+    var addFolderForm = document.getElementById("addFolderForm");
+    var editFolderForm = document.getElementById("editFolderForm");
+
+    // Display the edit folder form
+    if (addFolderForm.style.display == "block") {
+        addFolderForm.style.display = "none";
+        editFolderForm.style.display = "block";
+    } else if (addTaskForm.style.display == "block") {
+        addTaskForm.style.display = "none";
+        editFolderForm.style.display = "block";
+    } else {
+        editFolderForm.style.display = "block";
+    }
+    
+}
