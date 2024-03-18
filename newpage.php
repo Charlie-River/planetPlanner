@@ -193,6 +193,49 @@ if (isset($_POST['logout'])) {
   }
 }
 
+function deleteFolder($db, $folder_id) {
+  require_once("connectdb.php");
+  $folder_id = $folder_id;
+  try {
+    $deleteFolder = 'DELETE FROM folders WHERE folder_id = ?';
+    //Prepare/Execute to avoid injections!
+    $stmt = $db->prepare($deleteFolder);
+    $stmt->bindParam(1, $folder_id, PDO::PARAM_INT);
+    // Execute the query
+    $stmt->execute();
+    header("Location: newpage.php");
+    exit();
+} catch (PDOException $ex) {
+    // Display an error if there is an issue connecting to the database
+    echo ("Failed to connect to the database.<br>");
+    echo ($ex->getMessage());
+    exit;
+}
+}
+
+function editFolder($folder_id) {
+  echo "Editing folder with ID: " . $folder_id;
+}
+
+if(isset($_GET['action'])) {
+  $action = $_GET['action'];
+  //var_dump($_GET); // testing
+  
+  // Check if action is delete_folder and folder_id is set
+  if($action === 'delete_folder' && isset($_GET['folder_id'])) {
+      $folder_id = $_GET['folder_id'];
+      deleteFolder($db, $folder_id);
+  } 
+  // Check if action is edit_folder and folder_id is set
+  elseif($action === 'edit_folder' && isset($_GET['folder_id'])) {
+      $folder_id = $_GET['folder_id'];
+      editFolder($folder_id);
+  } 
+  else {
+      echo "Invalid action or folder ID.";
+  }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -242,17 +285,17 @@ if (isset($_POST['logout'])) {
           foreach ($rows as $row) {
           $folder_id = $row['folder_id'];
           ?>
-        <button class="newFolder" onclick="loadTasks(<?php echo $folder_id; ?>)">
-          <div class="right-section">
+        <button class="newFolderChild" onclick="loadTasks(<?php echo $folder_id; ?>)">
+          <div class="folder-right-section ">
             <input type="hidden" name="openfolder" id="openfolder" value="<?php echo $row['folderName']; ?>">
             <?php echo $row['folderName']; ?>
           </div>
-          <div class="folder-options left-section">
+          <div class="folder-left-section">
                 <span class="nestedButton" onclick="toggleDropdown(this)">
                     <img src="styles/options.png" class="optionIcon" alt="Folder Options">
                     <div class="dropdown-content">
-                        <a href="#">Delete Folder</a>
-                        <a href="#">Edit Folder</a>
+                        <a href="?action=delete_folder&folder_id=<?php echo $folder_id; ?>">Delete Folder</a>
+                        <a onclick="">Edit Folder (In Progress)</a>
                     </div>
                 </span>
             </div>
@@ -278,6 +321,21 @@ if (isset($_POST['logout'])) {
               </div>
               <div class="split-section">
                 <input type="submit" id="closeFolder" name="closeFolder" value="Close"/>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="editFolderPopup" id="editFolderForm">
+          <form method="post" class="form-container">
+            <h2> Edit Your Folder </h2>
+            <input type="text" placeholder="New Folder Name" name="editFolder">
+            <div class="split-column space-around">
+              <div class="split-section">
+                <input type="submit" id="editFolder" name="editFolder" value="Edit"/>
+              </div>
+              <div class="split-section">
+                <input type="submit" id="closeEditFolder" name="closeEditFolder" value="Close"/>
               </div>
             </div>
           </form>

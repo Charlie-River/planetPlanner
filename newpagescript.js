@@ -1,3 +1,4 @@
+
 function openForm() {
     var addTaskForm = document.getElementById("addTaskForm");
     var addFolderForm = document.getElementById("addFolderForm");
