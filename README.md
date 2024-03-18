@@ -9,7 +9,7 @@ Finalizing Tasks:
 - [ ] The heading which displays what folder the user is in, only changes if there are tasks in the folder
 - [ ] After deleting a page, it removes the user from the folder theyt were in
 - [ ] Users should not be required to add a task description when adding a task
-- [ ] Alt needed for images
+- [x] Alt needed for images
 
 
 **Also!** This has not yet been optimized for mobile :( The mobile version will need a different page for showing tasks as there's not enough space to have it the same as it is on web.

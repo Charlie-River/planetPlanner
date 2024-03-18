@@ -113,7 +113,7 @@ session_start(); // Start the session (if not already started)
 
 <body>
 	<!-- Image of my spaceman, css animation added  -->
-	<img src="astronaut.png" class="mySpaceman" src="image of a spaceman cartoon">
+	<img src="astronaut.png" class="mySpaceman" alt="image of a spaceman cartoon">
 
 	<div class="page-container">
 
