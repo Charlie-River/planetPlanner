@@ -1,17 +1,15 @@
 # planetPlanner
 This is the aforementioned to-do list website (in my bio). It is the only non-university project that is in progress at the moment!
 
-All main tasks were completed! These include: 
-Users can log in | Users can sign in | Users can add folders | Users can add tasks | Tasks from folders are displayed | Users can check tasks off once they're done - this affects the database | Completed tasks that haven't been deleted will automatically be deleted after 7 days | Users can log out | Users can delete folders | Selecting a folder will change a heading | Users can delete tasks without them being completed | Only 1 form will appear at a time - because all forms appear in the same place | Completed tasks will look different on front-end | Users can edit folders
+All main tasks were completed! The next steps are just some finalizing edits before I deem this complete 🤯
 
-Final Tasks: 
-- [] 
- 
-+ Other tasks may be added further on
-+ There might need to be a new page/nav that lets the user log out, edit folders/tasks, delete folders. This could be a users settings page, i dont want to clutter the main screen with too many things - hence thinking about a new page
+Finalizing Tasks: 
+- [ ] After editing a folder, the form needs manually closing before it refreshes the page
+- [ ] Something should appear for the user when theyre not in a folder
+- [ ] The heading which displays what folder the user is in, only changes if there are tasks in the folder
+- [ ] After deleting a page, it removes the user from the folder theyt were in
+- [ ] Users should not be required to add a task description when adding a task
+- [ ] Alt needed for images
 
-### Other Information
-There are a few style issues that I am fighting with at the moment, working on the functionality for the moment
-  - This doesn't apply to the cute spaceman that I spent a while animating over the login page 😼
 
 **Also!** This has not yet been optimized for mobile :( The mobile version will need a different page for showing tasks as there's not enough space to have it the same as it is on web.
